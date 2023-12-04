@@ -1,16 +1,17 @@
-import { FC, Fragment } from 'react'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import Login from '../entities/Login'
+import styles from '../app/login.module.scss'
 
 const LoginPage: FC = () => {
     return (
-        <Fragment>
+        <div className={styles.login}>
             <h1>Login</h1>
             <Login />
-            <p>
+            <p className={styles.login_text}>
                 Or <Link to='/register'>Register</Link>
             </p>
-        </Fragment>
+        </div>
     )
 }
 

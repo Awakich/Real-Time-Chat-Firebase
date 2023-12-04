@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+import styles from '../app/form.module.scss'
 
 type formProps = {
     title: string,
@@ -10,11 +11,11 @@ const Form: FC<formProps> = ({ title, handleClick }) => {
     const [password, setPassword] = useState<string>("");
 
     return (
-        <div>
-            <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
-            <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password' />
+        <div className={styles.form}>
+            <input className={styles.input} type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email' />
+            <input className={styles.input} type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password' />
 
-            <button onClick={() => handleClick(email, password)}>{title}</button>
+            <button className={styles.button} onClick={() => handleClick(email, password)}>{title}</button>
         </div>
     )
 }

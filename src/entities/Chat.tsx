@@ -2,9 +2,10 @@ import { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { addMessage, fetchMessages, messagesSelector } from '../features/messagesSlice';
 import { useAuth } from '../features/useAuth';
+import styles from '../app/chat.module.scss'
 
 const Chat: FC = () => {
-  const { email } = useAuth()
+  const { email, id } = useAuth()
   const { messages, loading } = useAppSelector(messagesSelector);
   const dispatch = useAppDispatch()
   const [userInput, setUserInput] = useState<string>("")
@@ -23,15 +24,17 @@ const Chat: FC = () => {
   if (loading) return <div>Loading...</div>
 
   return (
-    <div>
+    <div className={styles.chat}>
 
-      {messages.map(({ id, message }) => (
-        <div key={id}>{message}</div>
+      {messages.map((message) => (
+        <div className={styles.chat_item} key={message.id}>
+          <p className={message.id === id ? styles.chat_item_active : styles.chat_item_unactive}>{message.message}</p>
+        </div>
       ))}
 
-      <div >
-        <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
-        <button onClick={handleSubmit}>Отправить</button>
+      <div className={styles.chat_input}>
+        <input className={styles.input} type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+        <button className={styles.button} onClick={handleSubmit}>Отправить</button>
       </div>
     </div>
   )
